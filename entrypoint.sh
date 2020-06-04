@@ -12,7 +12,8 @@ method="${3}"
 
 echo '1'
 # lowercase
-method=${method,,}
+# method=${method,,}
+# method=$(echo $method | tr '[A-Z]' '[a-z]')
 
 echo '2'
 if [ $(which tar | wc -l) = '0' ]; then
