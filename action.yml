@@ -1,5 +1,5 @@
 name: 'Compress file'
-description: 'compress all files with appointed path'
+description: 'compress all files under appointed path'
 inputs:
   file_type:
     description: 'file type'
