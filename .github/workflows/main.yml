@@ -9,19 +9,16 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+
       - name: Compress
         uses: ./
         id: step1
         with:
-          file_type: 'tex'
-          path: 'doc'
-      - name: Get compressed time
+          file_type: 'txt'
+          path: 'test'
+      - name: Get compressed message
         run: |
-          echo "Compress time ${{ steps.step1.outputs.time }}"
-      - name: Hello world action step
-        id: hello
-        uses: actions/hello-world-docker-action@v1
-        with:
-          who-to-greet: 'Mona the Octocat'
-      - name: Get the output time
-        run: echo "The time was ${{ steps.hello.outputs.time }}"
+          echo "Compressed time   : ${{ steps.step1.outputs.time }}"
+          echo "compressed type   : ${{ env.file_type }}"
+          echo "compressed path   : ${{ env.path }}"
+          echo "compressed method : ${{ env.method }}"

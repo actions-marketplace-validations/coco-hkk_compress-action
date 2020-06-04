@@ -9,6 +9,10 @@ inputs:
     description: 'file path'
     required: true
     default: './'
+  method:
+    description: 'compress method: gzip bzip2 zip'
+    required: true
+    default: 'gzip'
 outputs:
   time:
     description: 'files compressed time'
@@ -19,3 +23,4 @@ runs:
   args:
     - ${{ inputs.file_type }}
     - ${{ inputs.path }}
+    - ${{ inputs.method }}
