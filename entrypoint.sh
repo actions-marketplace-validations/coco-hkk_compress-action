@@ -15,23 +15,23 @@ method="${3}"
 # method=$(echo $method | tr '[A-Z]' '[a-z]')
 
 if [ $(which tar | wc -l) = '0' ]; then
-    apk add tar -y
+    apk add tar
 fi
 
 case $method in
     zip)
         if [ $(which zip | wc -l) = '0' ]; then
-           apk add zip -y
+           apk add zip
         fi
         ;;
     gzip)
         if [ $(which gzip | wc -l) = '0' ]; then
-           apk add gzip -y
+           apk add gzip
         fi
         ;;
     bzip2)
         if [ $(which bzip2 | wc -l) = '0' ]; then
-            apk add bzip2 -y
+            apk add bzip2
         fi
         ;;
     tar)
