@@ -1,16 +1,21 @@
 # action.yml
-name: 'Hello World'
-description: 'Greet someone and record the time'
+name: 'Compress file'
+description: 'compress all files with appointed path'
 inputs:
-  who-to-greet:  # id of input
-    description: 'Who to greet'
+  file_type:
+    description: 'file type'
     required: true
-    default: 'World'
+    default: 'pdf'
+  path:
+    description: 'file path'
+    required: true
+    default: './'
 outputs:
-  time: # id of output
-    description: 'The time we greeted you'
+  time:
+    description: 'files compressed time'
 runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
-    - ${{ inputs.who-to-greet }}
+    - ${{ inputs.file_type }}
+    - ${{ inputs.path }}

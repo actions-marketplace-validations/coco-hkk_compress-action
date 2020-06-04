@@ -5,14 +5,14 @@ on: [push]
 jobs:
   hello_world_job:
     runs-on: ubuntu-latest
-    name: A job to say hello
+    name: Compress files
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Hello world action step
+      - name: Compress action step
         uses: ./
-        id: hello
         with:
-          who-to-greet: 'coco-hkk'
+          file_type: 'tex'
+          path: 'doc'
       - name: Get the output time
         run: echo "The time was ${{ steps.hello.outputs.time }}"
