@@ -6,7 +6,7 @@ target=""
 _time=""
 archive=""
 
-file_type="${1}"
+suffix="${1}"
 path="${2}"
 method="${3}"
 
@@ -45,13 +45,13 @@ esac
 
 cat << EOF
 
-file type  : $file_type
-path       : $path
-method     : $method
+suffix : $suffix
+path   : $path
+method : $method
 
 EOF
 
-find $path -name "*.$file_type" | tee file
+find $path -name "*.$suffix" | tee file
 
 mkdir compress_dir
 cat file | xargs -i cp {} compress_dir/

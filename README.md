@@ -1,10 +1,15 @@
 # Compress action
 
+First github action for learning.
+
+Main function is compressing file with specific suffix under
+specific path with specific compress tools.
+
 # Usage
 
-`file_type` file suffix
+`suffix` file suffix
 
-`path` appointed path
+`path`   appointed path
 
 `method` compress tools, such as gzip,bzip2,zip,etc.
 

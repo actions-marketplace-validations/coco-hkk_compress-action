@@ -3,8 +3,8 @@ name: 'Compress File'
 description: 'compress all files under specific path'
 
 inputs:
-  file_type:
-    description: 'file type'
+  suffix:
+    description: 'file suffix'
     required: true
     default: 'pdf'
   path:
@@ -24,6 +24,6 @@ runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
-    - ${{ inputs.file_type }}
+    - ${{ inputs.suffix }}
     - ${{ inputs.path }}
     - ${{ inputs.method }}

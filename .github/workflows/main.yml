@@ -14,7 +14,7 @@ jobs:
         uses: ./
         id: step1
         with:
-          file_type: 'txt'
+          suffix: 'txt'
           path: 'test'
           method: 'gzip'
       - name: Get archive
@@ -26,7 +26,7 @@ jobs:
         uses: ./
         id: step2
         with:
-          file_type: 'md'
+          suffix: 'md'
           path: 'test'
           method: 'bzip2'
       - name: Get archive
@@ -38,7 +38,7 @@ jobs:
         uses: ./
         id: step3
         with:
-          file_type: 'tex'
+          suffix: 'tex'
           path: 'test'
           method: 'zip'
       - name: Get compressed message
