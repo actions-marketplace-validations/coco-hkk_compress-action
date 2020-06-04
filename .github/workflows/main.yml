@@ -9,10 +9,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Compress action step
+      - name: Compress
         uses: ./
         with:
           file_type: 'tex'
           path: 'doc'
       - name: Get the output time
-        run: echo "The time was ${{ steps.outputs.time }}"
+        run: echo "The time was ${{ env.time }}"
