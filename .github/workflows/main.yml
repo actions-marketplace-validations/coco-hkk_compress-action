@@ -3,7 +3,7 @@ name: Compress File
 on: [push]
 
 jobs:
-  hello_world_job:
+  compress:
     runs-on: ubuntu-latest
     name: Compress files
     steps:
@@ -17,11 +17,9 @@ jobs:
           file_type: 'txt'
           path: 'test'
           method: 'gzip'
-      - name: Get compressed message
+      - name: Get archive
         run: |
-          pwd
-          ls
-          echo "archive file path : ${{ steps.step1.outputs.archive }}"
+          echo "archive : ${{ steps.step1.outputs.archive }}"
           tar -tzvf ${{ steps.step1.outputs.archive }}
 
       - name: Compress md with bzip2
@@ -31,11 +29,9 @@ jobs:
           file_type: 'md'
           path: 'test'
           method: 'bzip2'
-      - name: Get compressed message
+      - name: Get archive
         run: |
-          pwd
-          ls
-          echo "archive file path : ${{ steps.step2.outputs.archive }}"
+          echo "archive : ${{ steps.step2.outputs.archive }}"
           tar -tjvf ${{ steps.step2.outputs.archive }}
 
       - name: Compress tex with zip
@@ -47,7 +43,5 @@ jobs:
           method: 'zip'
       - name: Get compressed message
         run: |
-          pwd
-          ls
-          echo "archive file path : ${{ steps.step3.outputs.archive }}"
+          echo "archive : ${{ steps.step3.outputs.archive }}"
           unzip ${{ steps.step3.outputs.archive }}

@@ -1,5 +1,7 @@
-name: 'Compress file'
-description: 'compress all files under appointed path'
+name: 'Compress File'
+
+description: 'compress all files under specific path'
+
 inputs:
   file_type:
     description: 'file type'
@@ -13,6 +15,7 @@ inputs:
     description: 'compress method: gzip bzip2 zip'
     required: true
     default: 'gzip'
+
 outputs:
   archive:
     description: 'compressed archive file'
