@@ -1,4 +1,4 @@
-#!/bin/sh -c
+#!/bin/bash
 
 file_type="${1}"
 path="${2}"
