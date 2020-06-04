@@ -10,7 +10,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Compress
+      - name: Compress txt with gzip
         uses: ./
         id: step1
         with:
@@ -19,8 +19,29 @@ jobs:
           method: 'gzip'
       - name: Get compressed message
         run: |
-          echo "Compressed time   : ${{ steps.step1.outputs.time }}"
           echo "archive file path : ${{ steps.step1.outputs.archive }}"
-          echo "compressed type   : ${{ env.file_type }}"
-          echo "compressed path   : ${{ env.path }}"
-          echo "compressed method : ${{ env.method }}"
+          tar -xzvf ${{ steps.step1.outputs.archive }}
+
+      - name: Compress md with bzip2
+        uses: ./
+        id: step2
+        with:
+          file_type: 'md'
+          path: 'test'
+          method: 'bzip2'
+      - name: Get compressed message
+        run: |
+          echo "archive file path : ${{ steps.step2.outputs.archive }}"
+          tar -xjvf ${{ steps.step2.outputs.archive }}
+
+      - name: Compress tex with zip
+        uses: ./
+        id: step3
+        with:
+          file_type: 'tex'
+          path: 'test'
+          method: 'zip'
+      - name: Get compressed message
+        run: |
+          echo "archive file path : ${{ steps.step3.outputs.archive }}"
+          unzip ${{ steps.step3.outputs.archive }}

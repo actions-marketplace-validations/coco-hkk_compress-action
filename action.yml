@@ -14,8 +14,6 @@ inputs:
     required: true
     default: 'gzip'
 outputs:
-  time:
-    description: 'files compressed time'
   archive:
     description: 'compressed archive file'
 

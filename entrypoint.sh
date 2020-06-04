@@ -10,12 +10,10 @@ file_type="${1}"
 path="${2}"
 method="${3}"
 
-echo '1'
 # lowercase
 # method=${method,,}
 # method=$(echo $method | tr '[A-Z]' '[a-z]')
 
-echo '2'
 if [ $(which tar | wc -l) = '0' ]; then
     apt-get install tar -y
 fi
@@ -58,29 +56,27 @@ find $path -name "*.$file_type" | tee file
 mkdir archive
 cat file | xargs -i cp {} archive/
 
+target=$(echo "archive_"$(date | awk '{print $1 $2 $3}'))
 case $method in
     zip)
-        target="archive.zip"
+        target=$(echo $target"."$method)
         zip -rq $target archive
         ;;
     gzip)
-        target="archive.tar.gz"
+        target=$(echo $target".tar.gz")
         tar -czf $target archive
         ;;
     bzip2)
-        target="archive.tar.bz2"
+        target=$(echo $target".tar.bz2")
         tar -cjf $target archive
         ;;
     tar)
-        target="archive.tar"
+        target=$(echo $target".tar")
         tar -cf $target archive
         ;;
 esac
 
-_time=$(date)
 archive=$(echo $(pwd)/"$target")
-
-echo ::set-output name=time::$_time
 echo ::set-output name=archive::$archive
 
 # clean
