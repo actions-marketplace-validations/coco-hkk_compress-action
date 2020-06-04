@@ -19,6 +19,8 @@ jobs:
           method: 'gzip'
       - name: Get compressed message
         run: |
+          pwd
+          ls
           echo "archive file path : ${{ steps.step1.outputs.archive }}"
           tar -xzvf ${{ steps.step1.outputs.archive }}
 
@@ -31,6 +33,8 @@ jobs:
           method: 'bzip2'
       - name: Get compressed message
         run: |
+          pwd
+          ls
           echo "archive file path : ${{ steps.step2.outputs.archive }}"
           tar -xjvf ${{ steps.step2.outputs.archive }}
 
@@ -43,5 +47,7 @@ jobs:
           method: 'zip'
       - name: Get compressed message
         run: |
+          pwd
+          ls
           echo "archive file path : ${{ steps.step3.outputs.archive }}"
           unzip ${{ steps.step3.outputs.archive }}

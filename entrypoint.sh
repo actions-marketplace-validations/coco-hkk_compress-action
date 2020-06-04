@@ -56,22 +56,22 @@ find $path -name "*.$file_type" | tee file
 mkdir archive
 cat file | xargs -i cp {} archive/
 
-target=$(echo "archive_"$(date | awk '{print $1 $2 $3}'))
+target=$(date +%Y-%m-%d_%H_%M)
 case $method in
     zip)
-        target=$(echo $target"."$method)
+        target=$(echo "archive_"$target"."$method)
         zip -rq $target archive
         ;;
     gzip)
-        target=$(echo $target".tar.gz")
+        target=$(echo "archive_"$target".tar.gz")
         tar -czf $target archive
         ;;
     bzip2)
-        target=$(echo $target".tar.bz2")
+        target=$(echo "archive_"$target".tar.bz2")
         tar -cjf $target archive
         ;;
     tar)
-        target=$(echo $target".tar")
+        target=$(echo "archive_"$target".tar")
         tar -cf $target archive
         ;;
 esac
