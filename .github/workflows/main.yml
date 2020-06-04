@@ -1,4 +1,4 @@
-name: file-archive-actions
+name: Compress File
 
 on: [push]
 
