@@ -1,6 +1,6 @@
 name: 'Compress File'
 
-description: 'compress all files under specific path'
+description: 'compress specific suffix files under specific path'
 
 inputs:
   suffix:

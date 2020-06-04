@@ -12,7 +12,7 @@ method="${3}"
 
 # lowercase
 # method=${method,,}
-# method=$(echo $method | tr '[A-Z]' '[a-z]')
+method=$(echo $method | tr '[A-Z]' '[a-z]')
 
 if [ $(which tar | wc -l) = '0' ]; then
     apk add tar

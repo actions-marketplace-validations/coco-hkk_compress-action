@@ -1,5 +1,7 @@
 # Compress action
 
+![Compress File](https://github.com/coco-hkk/compress-action/workflows/Compress%20File/badge.svg)
+
 First github action for learning.
 
 Main function is compressing file with specific suffix under
@@ -15,17 +17,17 @@ specific path with specific compress tools.
 
 ```yaml
 - name: Compress txt with gzip
-uses: ./
-id: step1
-with:
-  file_type: 'txt'
-  path: 'test'
-  method: 'gzip'
+    uses: coco-hkk/compress-action@master
+    id: step1
+    with:
+      file_type: 'txt'
+      path: 'test'
+      method: 'gzip'
 - name: Get archive
-run: |
-  # archive
-  echo "archive : ${{ steps.step1.outputs.archive }}"
-  tar -tzvf ${{ steps.step1.outputs.archive }}
+    run: |
+      # archive
+      echo "archive : ${{ steps.step1.outputs.archive }}"
+      tar -tzvf ${{ steps.step1.outputs.archive }}
 ```
 
 最近比较坑爹，总是看错字符
