@@ -22,7 +22,7 @@ jobs:
           pwd
           ls
           echo "archive file path : ${{ steps.step1.outputs.archive }}"
-          tar -xzvf ${{ steps.step1.outputs.archive }}
+          tar -tzvf ${{ steps.step1.outputs.archive }}
 
       - name: Compress md with bzip2
         uses: ./
@@ -36,7 +36,7 @@ jobs:
           pwd
           ls
           echo "archive file path : ${{ steps.step2.outputs.archive }}"
-          tar -xjvf ${{ steps.step2.outputs.archive }}
+          tar -tjvf ${{ steps.step2.outputs.archive }}
 
       - name: Compress tex with zip
         uses: ./

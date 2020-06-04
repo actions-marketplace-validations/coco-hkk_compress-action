@@ -53,26 +53,26 @@ EOF
 
 find $path -name "*.$file_type" | tee file
 
-mkdir archive
-cat file | xargs -i cp {} archive/
+mkdir compress_dir
+cat file | xargs -i cp {} compress_dir/
 
 target=$(date +%Y-%m-%d_%H_%M)
 case $method in
     zip)
         archive=$(echo "archive_"$target"."$method)
-        zip -rq $archive archive
+        zip -rq $archive compress_dir
         ;;
     gzip)
         archive=$(echo "archive_"$target".tar.gz")
-        tar -czf $archive archive
+        tar -czf $archive compress_dir
         ;;
     bzip2)
         archive=$(echo "archive_"$target".tar.bz2")
-        tar -cjf $archive archive
+        tar -cjf $archive compress_dir
         ;;
     tar)
         archive=$(echo "archive_"$target".tar")
-        tar -cf $archive archive
+        tar -cf $archive compress_dir
         ;;
 esac
 
@@ -80,5 +80,5 @@ echo ::set-output name=archive::$archive
 
 # clean
 rm file
-rm -rf archive
+rm -rf compress_dir
 
