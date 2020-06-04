@@ -11,7 +11,6 @@ inputs:
     required: true
     default: './'
 outputs:
-  id: step1
   time:
     description: 'files compressed time'
 runs:

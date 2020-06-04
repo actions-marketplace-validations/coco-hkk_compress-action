@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 file_type="${1}"
 path="${2}"
 

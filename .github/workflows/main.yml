@@ -11,8 +11,10 @@ jobs:
         uses: actions/checkout@v2
       - name: Compress
         uses: ./
+        id: step1
         with:
           file_type: 'tex'
           path: 'doc'
       - name: Get the output time
-        run: echo "The time was ${{ steps.step1.outputs.time }}"
+        run: |
+          echo "The time was ${{ steps.step1.outputs.time }}"
