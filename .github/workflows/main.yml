@@ -16,9 +16,11 @@ jobs:
         with:
           file_type: 'txt'
           path: 'test'
+          method: 'gzip'
       - name: Get compressed message
         run: |
           echo "Compressed time   : ${{ steps.step1.outputs.time }}"
+          echo "archive file path : ${{ steps.step1.outputs.archive }}"
           echo "compressed type   : ${{ env.file_type }}"
           echo "compressed path   : ${{ env.path }}"
           echo "compressed method : ${{ env.method }}"

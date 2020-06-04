@@ -16,6 +16,8 @@ inputs:
 outputs:
   time:
     description: 'files compressed time'
+  archive:
+    description: 'compressed archive file'
 
 runs:
   using: 'docker'

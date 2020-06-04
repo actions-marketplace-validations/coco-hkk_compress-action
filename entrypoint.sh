@@ -2,13 +2,19 @@
 
 set -e
 
+target=""
+_time=""
+archive=""
+
 file_type="${1}"
 path="${2}"
 method="${3}"
 
+echo '1'
 # lowercase
 method=${method,,}
 
+echo '2'
 if [ $(which tar | wc -l) = '0' ]; then
     apt-get install tar -y
 fi
@@ -53,22 +59,28 @@ cat file | xargs -i cp {} archive/
 
 case $method in
     zip)
-        zip -rq archive.zip archive
+        target="archive.zip"
+        zip -rq $target archive
         ;;
     gzip)
-        tar -czf archive.tar.gz archive
+        target="archive.tar.gz"
+        tar -czf $target archive
         ;;
     bzip2)
-        tar -cjf archive.tar.bz2 archive
+        target="archive.tar.bz2"
+        tar -cjf $target archive
         ;;
     tar)
-        tar -cf archive.tar archive
+        target="archive.tar"
+        tar -cf $target archive
         ;;
 esac
 
-time=$(date)
+_time=$(date)
+archive=$(echo $(pwd)/"$target")
 
-echo ::set-output name=time::$time
+echo ::set-output name=time::$_time
+echo ::set-output name=archive::$archive
 
 # clean
 rm file
