@@ -1,4 +1,3 @@
-# action.yml
 name: 'Compress file'
 description: 'compress all files with appointed path'
 inputs:
@@ -13,6 +12,7 @@ inputs:
 outputs:
   time:
     description: 'files compressed time'
+
 runs:
   using: 'docker'
   image: 'Dockerfile'

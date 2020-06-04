@@ -11,4 +11,4 @@ echo "arg1: $file_type"
 echo "arg2: $path"
 
 time=$(date)
-echo "::set-output name=time::$time"
+echo ::set-output name=time::$time

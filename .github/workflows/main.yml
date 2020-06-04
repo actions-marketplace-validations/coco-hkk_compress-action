@@ -15,7 +15,7 @@ jobs:
         with:
           file_type: 'tex'
           path: 'doc'
-      - name: Get the output time
+      - name: Get compressed time
         run: |
           echo "Compress time ${{ steps.step1.outputs.time }}"
       - name: Hello world action step
