@@ -9,6 +9,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+      - name: env
+        run: |
+          pwd
+          ls
+          which bash
+          which sh
       - name: Compress
         uses: ./
         with:
