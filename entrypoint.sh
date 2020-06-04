@@ -15,23 +15,23 @@ method="${3}"
 # method=$(echo $method | tr '[A-Z]' '[a-z]')
 
 if [ $(which tar | wc -l) = '0' ]; then
-    apt-get install tar -y
+    apk add tar -y
 fi
 
 case $method in
     zip)
         if [ $(which zip | wc -l) = '0' ]; then
-            apt-get install zip -y
+           apk add zip -y
         fi
         ;;
     gzip)
         if [ $(which gzip | wc -l) = '0' ]; then
-            apt-get install gzip -y
+           apk add gzip -y
         fi
         ;;
     bzip2)
         if [ $(which bzip2 | wc -l) = '0' ]; then
-            apt-get install bzip2 -y
+            apk add bzip2 -y
         fi
         ;;
     tar)
@@ -81,4 +81,3 @@ echo ::set-output name=archive::$archive
 # clean
 rm file
 rm -rf compress_dir
-
