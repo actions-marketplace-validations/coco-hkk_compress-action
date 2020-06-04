@@ -59,24 +59,23 @@ cat file | xargs -i cp {} archive/
 target=$(date +%Y-%m-%d_%H_%M)
 case $method in
     zip)
-        target=$(echo "archive_"$target"."$method)
-        zip -rq $target archive
+        archive=$(echo "archive_"$target"."$method)
+        zip -rq $archive archive
         ;;
     gzip)
-        target=$(echo "archive_"$target".tar.gz")
-        tar -czf $target archive
+        archive=$(echo "archive_"$target".tar.gz")
+        tar -czf $archive archive
         ;;
     bzip2)
-        target=$(echo "archive_"$target".tar.bz2")
-        tar -cjf $target archive
+        archive=$(echo "archive_"$target".tar.bz2")
+        tar -cjf $archive archive
         ;;
     tar)
-        target=$(echo "archive_"$target".tar")
-        tar -cf $target archive
+        archive=$(echo "archive_"$target".tar")
+        tar -cf $archive archive
         ;;
 esac
 
-archive=$(echo "${{ GITHUB_WORKSPACE }}/$target")
 echo ::set-output name=archive::$archive
 
 # clean
