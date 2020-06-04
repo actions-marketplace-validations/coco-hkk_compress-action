@@ -3,6 +3,7 @@
 file_type="${1}"
 path="${2}"
 
+echo $*
 echo $file_type
 echo $path
 

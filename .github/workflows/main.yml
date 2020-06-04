@@ -21,4 +21,4 @@ jobs:
           file_type: 'tex'
           path: 'doc'
       - name: Get the output time
-        run: echo "The time was ${{ env.time }}"
+        run: echo "The time was ${{ steps.step1.outputs.time }}"
