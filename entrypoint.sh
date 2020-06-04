@@ -76,7 +76,7 @@ case $method in
         ;;
 esac
 
-archive=$(echo $(pwd)/"$target")
+archive=$(echo ${{ GITHUB_WORKSPACE }}/"$target")
 echo ::set-output name=archive::$archive
 
 # clean
