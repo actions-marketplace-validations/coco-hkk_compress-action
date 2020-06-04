@@ -1,11 +1,12 @@
-#!/bin/sh -l
+#!/bin/sh -c
 
 file_type="${1}"
 path="${2}"
 
-echo $*
-echo $file_type
-echo $path
+echo "parameter:"
+echo "command: $*"
+echo "arg1: $file_type"
+echo "arg2: $path"
 
 time=$(date)
 echo "::set-output name=time::$time"
