@@ -1,8 +1,5 @@
 #!/bin/bash
 
-which bash
-ls -l /bin/sh
-
 set -e
 
 target=""

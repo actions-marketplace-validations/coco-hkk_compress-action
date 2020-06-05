@@ -7,13 +7,15 @@ First github action for learning.
 Main function is compressing file with specific suffix under
 specific path with specific compress tools.
 
-# Usage
+## Usage
 
 `suffix` file suffix
 
 `path`   appointed path
 
 `method` compress tools, such as gzip,bzip2,zip,etc.
+
+### example
 
 ```yaml
 - name: Compress txt with gzip
