@@ -14,34 +14,19 @@ method="${3}"
 # method=${method,,}
 method=$(echo $method | tr '[A-Z]' '[a-z]')
 
-if [ $(which tar | wc -l) = '0' ]; then
-    apk add tar
+if [[ "$method" =~ ^(tar|zip|gzip|bzip2)$ ]]; then
+    target=$(date +%Y-%m-%d_%H_%M)
+else
+    echo "unsupport tool: $method, exit"
+    echo "::set-env name=error_value::1"
+    exit
 fi
 
-case $method in
-    zip)
-        if [ $(which zip | wc -l) = '0' ]; then
-           apk add zip
-        fi
-        ;;
-    gzip)
-        if [ $(which gzip | wc -l) = '0' ]; then
-           apk add gzip
-        fi
-        ;;
-    bzip2)
-        if [ $(which bzip2 | wc -l) = '0' ]; then
-            apk add bzip2
-        fi
-        ;;
-    tar)
-        ;;
-    *)
-        echo "unsupport compress tool"
-        echo "::set-env name=error_value::1"
-        exit
-        ;;
-esac
+if [ ! -d "$path" ]; then
+    echo "path $path not exist, exit"
+    echo "::set-env name=error_value::1"
+    exit
+fi
 
 cat << EOF
 
@@ -53,31 +38,31 @@ EOF
 
 find $path -name "*.$suffix" | tee file
 
-mkdir compress_dir
-cat file | xargs -i cp {} compress_dir/
+mkdir $target
+cat file | xargs -i cp {} $target/
 
-target=$(date +%Y-%m-%d_%H_%M)
 case $method in
     zip)
-        archive=$(echo "archive_"$target"."$method)
-        zip -rq $archive compress_dir
+        archive=$(echo "archive_"$target".zip")
+        zip -rq $archive $target
         ;;
     gzip)
         archive=$(echo "archive_"$target".tar.gz")
-        tar -czf $archive compress_dir
+        tar -czf $archive $target
         ;;
     bzip2)
         archive=$(echo "archive_"$target".tar.bz2")
-        tar -cjf $archive compress_dir
+        tar -cjf $archive $target
         ;;
     tar)
         archive=$(echo "archive_"$target".tar")
-        tar -cf $archive compress_dir
+        tar -cf $archive $target
         ;;
 esac
 
+# outputs.archive
 echo ::set-output name=archive::$archive
 
 # clean
 rm file
-rm -rf compress_dir
+rm -rf $target
