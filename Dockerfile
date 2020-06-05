@@ -3,6 +3,7 @@ FROM alpine:3.10
 LABEL maintainer="coco-hkk@github.com"
 
 RUN apk update \
+    apk add bash \
     apk add tar \
     apk add zip \
     apk add gzip \

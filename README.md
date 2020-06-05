@@ -27,7 +27,11 @@ specific path with specific compress tools.
     run: |
       # archive
       echo "archive : ${{ steps.step1.outputs.archive }}"
-      tar -tzvf ${{ steps.step1.outputs.archive }}
+      if [ ${{ env.value }} = "1"]; then
+        echo "archive create failed, exit"
+      else
+        tar -tzvf ${{ steps.step1.outputs.archive }}
+      fi
 ```
 
 最近比较坑爹，总是看错字符
