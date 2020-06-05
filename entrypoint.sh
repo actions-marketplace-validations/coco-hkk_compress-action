@@ -39,7 +39,7 @@ EOF
 
 find $path -name "*.$suffix" | tee file
 
-[ $(cat file | wc -l) = '0' ] && echo "no $suffix file exist."
+[ $(cat file | wc -l) = '0' ] && echo "no $suffix file exist. To be generating empty archive"
 
 mkdir $target
 cat file | xargs -i cp {} $target/

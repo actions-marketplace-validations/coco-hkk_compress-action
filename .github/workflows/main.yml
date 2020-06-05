@@ -13,8 +13,8 @@ jobs:
         uses: ./
         id: step1
         with:
-          suffix: 'tt'
-          path: 'test'
+          suffix: 'txt'
+          path: 'tes'
           method: 'gzip'
       - name: Get archive
         run: |
