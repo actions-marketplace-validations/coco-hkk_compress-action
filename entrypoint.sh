@@ -1,4 +1,11 @@
-#!/bin/bash
+#!/bin/sh -l
+
+which bash
+ls -l /bin/sh
+which zip
+which tar
+which gzip
+which bzip2
 
 set -e
 
