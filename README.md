@@ -29,7 +29,7 @@ specific path with specific compress tools.
     run: |
       # archive
       echo "archive : ${{ steps.step1.outputs.archive }}"
-      if [ "1" = ${{ env.value }} ]; then
+      if [ "1"x = "${{ env.value }}"x ]; then
         echo "archive create failed, exit"
       else
         tar -tzvf ${{ steps.step1.outputs.archive }}
