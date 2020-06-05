@@ -15,6 +15,11 @@ specific path with specific compress tools.
 
 `method` compress tools, such as gzip,bzip2,zip,etc.
 
+`steps.step1.outputs.archive` archive
+
+`env.error_value` 1 for method unsupport, action exit
+
+
 ### example
 
 ```yaml
@@ -29,7 +34,7 @@ specific path with specific compress tools.
     run: |
       # archive
       echo "archive : ${{ steps.step1.outputs.archive }}"
-      if [ "1"x = "${{ env.value }}"x ]; then
+      if [ "1"x = "${{ env.error_value }}"x ]; then
         echo "archive create failed, exit"
       else
         tar -tzvf ${{ steps.step1.outputs.archive }}
