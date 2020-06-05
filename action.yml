@@ -27,3 +27,7 @@ runs:
     - ${{ inputs.suffix }}
     - ${{ inputs.path }}
     - ${{ inputs.method }}
+
+branding:
+  icon: archive
+  color: purple
