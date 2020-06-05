@@ -9,6 +9,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+      - name: envirment
+        run: |
+          which bash
+          which sh
+          ls -l /bin/sh
 
       - name: Compress txt with gzip
         uses: ./
