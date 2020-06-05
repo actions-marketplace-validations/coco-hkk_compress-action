@@ -14,7 +14,8 @@ method="${3}"
 # method=${method,,}
 method=$(echo $method | tr '[A-Z]' '[a-z]')
 
-if [[ "$method" =~ ^(tar|zip|gzip|bzip2)$ ]]; then
+if [[ "$method" =~ ^(tar|zip|gzip|bzip2)$ ]]
+then
     target=$(date +%Y-%m-%d_%H_%M)
 else
     echo "unsupport tool: $method, exit"

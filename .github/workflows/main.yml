@@ -20,7 +20,11 @@ jobs:
       - name: Get archive
         run: |
           echo "archive : ${{ steps.step1.outputs.archive }}"
-          tar -tzvf ${{ steps.step1.outputs.archive }}
+          if [ ${{ env.value }} = "1"]; then
+            echo "archive create failed, exit"
+          else
+            tar -tzvf ${{ steps.step1.outputs.archive }}
+          fi
 
       - name: Compress md with bzip2
         uses: ./
@@ -32,7 +36,11 @@ jobs:
       - name: Get archive
         run: |
           echo "archive : ${{ steps.step2.outputs.archive }}"
-          tar -tjvf ${{ steps.step2.outputs.archive }}
+          if [ ${{ env.value }} = "1"]; then
+            echo "archive create failed, exit"
+          else
+            tar -tjvf ${{ steps.step2.outputs.archive }}
+          fi
 
       - name: Compress tex with zip
         uses: ./
@@ -44,4 +52,8 @@ jobs:
       - name: Get compressed message
         run: |
           echo "archive : ${{ steps.step3.outputs.archive }}"
-          unzip ${{ steps.step3.outputs.archive }}
+          if [ ${{ env.value }} = "1"]; then
+            echo "archive create failed, exit"
+          else
+            unzip ${{ steps.step3.outputs.archive }}
+          fi
