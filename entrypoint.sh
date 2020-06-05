@@ -14,6 +14,8 @@ method="${3}"
 # method=${method,,}
 method=$(echo $method | tr '[A-Z]' '[a-z]')
 
+echo "::set-env name=error_value::0"
+
 if [[ "$method" =~ ^(tar|zip|gzip|bzip2)$ ]]
 then
     target=$(date +%Y-%m-%d_%H_%M)
@@ -25,7 +27,7 @@ fi
 
 if [ ! -d "$path" ]; then
     echo "path $path not exist, exit"
-    echo "::set-env name=error_value::1"
+    echo "::set-env name=error_value::2"
     exit
 fi
 

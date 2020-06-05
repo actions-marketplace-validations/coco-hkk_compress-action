@@ -17,8 +17,7 @@ specific path with specific compress tools.
 
 `steps.step1.outputs.archive` archive
 
-`env.error_value` 1 for method unsupport, action exit
-
+`env.error_value` 1 for method unsupport, 2 for path not exist, action exit
 
 ### example
 
@@ -34,7 +33,7 @@ specific path with specific compress tools.
     run: |
       # archive
       echo "archive : ${{ steps.step1.outputs.archive }}"
-      if [ "1"x = "${{ env.error_value }}"x ]; then
+      if [ "0"x != "${{ env.error_value }}"x ]; then
         echo "archive create failed, exit"
       else
         tar -tzvf ${{ steps.step1.outputs.archive }}

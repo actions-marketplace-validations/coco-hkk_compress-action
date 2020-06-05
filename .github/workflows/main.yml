@@ -20,7 +20,7 @@ jobs:
         run: |
           echo "archive : ${{ steps.step1.outputs.archive }}"
 
-          if [ "1"x = "${{ env.error_value }}"x ]; then
+          if [ "0"x != "${{ env.error_value }}"x ]; then
             echo "archive create failed, exit"
           else
             tar -tzvf ${{ steps.step1.outputs.archive }}
@@ -32,11 +32,11 @@ jobs:
         with:
           suffix: 'md'
           path: 'test'
-          method: 'bzip2'
+          method: 'bzip'
       - name: Get archive
         run: |
           echo "archive : ${{ steps.step2.outputs.archive }}"
-          if [ "1"x = "${{ env.error_value }}"x ]; then
+          if [ "0"x != "${{ env.error_value }}"x ]; then
             echo "archive create failed, exit"
           else
             tar -tjvf ${{ steps.step2.outputs.archive }}
@@ -52,7 +52,7 @@ jobs:
       - name: Get compressed message
         run: |
           echo "archive : ${{ steps.step3.outputs.archive }}"
-          if [ "1"x = "${{ env.error_value }}"x ]; then
+          if [ "0"x != "${{ env.error_value }}"x ]; then
             echo "archive create failed, exit"
           else
             unzip ${{ steps.step3.outputs.archive }}
