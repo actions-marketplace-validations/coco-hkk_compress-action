@@ -4,22 +4,39 @@
 
 First github action for learning.
 
-Main function is compressing file with specific suffix under
-specific path with specific compress tools.
+Compress specific suffix file with specific compress tools in the target path directory and it's sub directories.
 
-## Usage
+## Inputs
 
-`suffix` file suffix
+### `suffix`
 
-`path`   appointed path
+Compressed file suffix. Such as tex, md, txt, pdf, etc.
 
-`method` compress tools, such as gzip,bzip2,zip,etc.
+### `path`
 
-`steps.step1.outputs.archive` archive
+Target path directory
 
-`env.error_value` 1 for method unsupport, 2 for path not exist, action exit
+### `method`
 
-### example
+Compress tools, such as gzip,bzip2,zip,etc.
+
+## Outputs
+
+### `archive`
+
+Archive file in GITHUB_WORKSPACE
+
+## Env
+
+### `env.error_value`
+
+`0` : no error
+
+`1` : commpress method unsupport
+
+`2` : path directory not exist
+
+## Example Usage
 
 ```yaml
 - name: Compress txt with gzip
@@ -39,7 +56,3 @@ specific path with specific compress tools.
         tar -tzvf ${{ steps.step1.outputs.archive }}
       fi
 ```
-
-最近比较坑爹，总是看错字符
-
-action看成actions导致浪费很长时间
