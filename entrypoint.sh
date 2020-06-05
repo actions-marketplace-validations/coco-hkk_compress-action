@@ -1,11 +1,7 @@
-#!/bin/sh -l
+#!/bin/bash
 
 which bash
 ls -l /bin/sh
-which zip
-which tar
-which gzip
-which bzip2
 
 set -e
 
@@ -45,6 +41,8 @@ method : $method
 EOF
 
 find $path -name "*.$suffix" | tee file
+
+[ $(cat file | wc -l) = '0' ] && echo "no $suffix file exist."
 
 mkdir $target
 cat file | xargs -i cp {} $target/
