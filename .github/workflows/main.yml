@@ -13,14 +13,12 @@ jobs:
         uses: ./
         id: step1
         with:
-          suffix: 'txt'
-          path: 'tes'
-          method: 'gzip'
+          file-suffix: 'txt'
+          target-directory-path: 'tes'
+          compress-tool: 'gzip'
       - name: Get archive
         run: |
-          echo "archive : ${{ steps.step1.outputs.archive }}"
-
-          if [ "0"x != "${{ env.error_value }}"x ]; then
+          if [ "0"x != "${{ steps.step1.outputs.state }}"x ]; then
             echo "archive create failed, exit"
           else
             tar -tzvf ${{ steps.step1.outputs.archive }}
@@ -30,30 +28,28 @@ jobs:
         uses: ./
         id: step2
         with:
-          suffix: 'md'
-          path: 'test'
-          method: 'bzip'
+          file-suffix: 'md'
+          target-directory-path: 'test'
+          compress-tool: 'bzip'
       - name: Get archive
         run: |
-          echo "archive : ${{ steps.step2.outputs.archive }}"
-          if [ "0"x != "${{ env.error_value }}"x ]; then
+          if [ "0"x != "${{ steps.step2.outputs.state }}"x ]; then
             echo "archive create failed, exit"
           else
-            tar -tjvf ${{ steps.step2.outputs.archive }}
+            tar -tzvf ${{ steps.step2.outputs.archive }}
           fi
 
       - name: Compress tex with zip
         uses: ./
         id: step3
         with:
-          suffix: 'tex'
-          path: 'test'
-          method: 'zip'
+          file-suffix: 'tex'
+          target-directory-path: 'test'
+          compress-tool: 'zip'
       - name: Get compressed message
         run: |
-          echo "archive : ${{ steps.step3.outputs.archive }}"
-          if [ "0"x != "${{ env.error_value }}"x ]; then
+          if [ "0"x != "${{ steps.step3.outputs.state }}"x ]; then
             echo "archive create failed, exit"
           else
-            unzip ${{ steps.step3.outputs.archive }}
+            tar -tzvf ${{ steps.step3.outputs.archive }}
           fi

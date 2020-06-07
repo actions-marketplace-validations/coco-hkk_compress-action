@@ -3,20 +3,25 @@ name: 'Compress File'
 description: 'compress specific suffix files under specific path'
 
 inputs:
-  suffix:
+  file-suffix:
     description: 'file suffix'
     required: true
     default: 'pdf'
-  path:
-    description: 'file path'
+  target-directory-path:
+    description: 'target directory path'
     required: true
     default: './'
-  method:
-    description: 'compress method: gzip bzip2 zip'
+  compress-tool:
+    description: 'compress tool: gzip bzip2 zip'
     required: true
     default: 'gzip'
 
 outputs:
+  state:
+    description: 'compress action state. \
+                  0 : normal state  \
+                  1 : commpress tool unsupport  \
+                  2 : target directory path not exist'
   archive:
     description: 'compressed archive file'
 
@@ -24,9 +29,9 @@ runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
-    - ${{ inputs.suffix }}
-    - ${{ inputs.path }}
-    - ${{ inputs.method }}
+    - ${{ inputs.file-suffix }}
+    - ${{ inputs.target-directory-path }}
+    - ${{ inputs.compress-tool }}
 
 branding:
   icon: archive

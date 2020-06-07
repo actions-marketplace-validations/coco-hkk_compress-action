@@ -4,37 +4,49 @@
 
 First github action for learning.
 
-Compress specific suffix file with specific compress tools in the target path directory and it's sub directories.
+Use the specified compression tool to compress the specified file suffix in the specified directory.
 
 ## Inputs
 
-### `suffix`
+### `file-suffix`
 
 Compressed file suffix. Such as tex, md, txt, pdf, etc.
 
-### `path`
+- require: true
 
-Target path directory
+- default: pdf
 
-### `method`
+### `target-directory-path`
+
+Target directory path
+
+- require: true
+
+- default: ./
+
+### `compress-tool`
 
 Compress tools, such as gzip,bzip2,zip,etc.
 
+- require: true
+
+- default: gzip
+
 ## Outputs
+
+### `state`
+
+Action state when generating archive.
+
+- `0` : normal
+
+- `1` : unsupport tool
+
+- `2` : bad target directory path
 
 ### `archive`
 
-Archive file in GITHUB_WORKSPACE
-
-## Env
-
-### `env.error_value`
-
-`0` : no error
-
-`1` : commpress method unsupport
-
-`2` : path directory not exist
+Final generated archive file in GITHUB_WORKSPACE.
 
 ## Example Usage
 
@@ -43,14 +55,12 @@ Archive file in GITHUB_WORKSPACE
     uses: coco-hkk/compress-action@master
     id: step1
     with:
-      file_type: 'txt'
-      path: 'test'
-      method: 'gzip'
-- name: Get archive
+      file-suffix: 'txt'
+      target-directory-path: 'tes'
+      compress-tool: 'gzip'
+  - name: Get archive
     run: |
-      # archive
-      echo "archive : ${{ steps.step1.outputs.archive }}"
-      if [ "0"x != "${{ env.error_value }}"x ]; then
+      if [ "0"x != "${{ steps.step1.outputs.state }}"x ]; then
         echo "archive create failed, exit"
       else
         tar -tzvf ${{ steps.step1.outputs.archive }}

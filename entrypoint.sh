@@ -8,34 +8,34 @@ archive=""
 
 suffix="${1}"
 path="${2}"
-method="${3}"
+tool="${3}"
 
 # lowercase
-# method=${method,,}
-method=$(echo $method | tr '[A-Z]' '[a-z]')
+# tool=${tool,,}
+tool=$(echo $tool | tr '[A-Z]' '[a-z]')
 
-echo "::set-env name=error_value::0"
+echo "::set-output name=state::0"
 
-if [[ "$method" =~ ^(tar|zip|gzip|bzip2)$ ]]
+if [[ "$tool" =~ ^(tar|zip|gzip|bzip2)$ ]]
 then
     target=$(date +%Y-%m-%d_%H_%M)
 else
-    echo "unsupport tool: $method, exit"
-    echo "::set-env name=error_value::1"
+    echo "unsupport tool: $tool, exit"
+    echo "::set-output name=state::1"
     exit
 fi
 
 if [ ! -d "$path" ]; then
     echo "path $path not exist, exit"
-    echo "::set-env name=error_value::2"
+    echo "::set-output name=state::2"
     exit
 fi
 
 cat << EOF
 
-suffix : $suffix
-path   : $path
-method : $method
+file-suffix             : $suffix
+target-directory-path   : $path
+compress-tool           : $tool
 
 EOF
 
@@ -46,7 +46,7 @@ find $path -name "*.$suffix" | tee file
 mkdir $target
 cat file | xargs -i cp {} $target/
 
-case $method in
+case $tool in
     zip)
         archive=$(echo "archive_"$target".zip")
         zip -rq $archive $target
