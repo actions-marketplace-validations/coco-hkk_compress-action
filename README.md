@@ -4,7 +4,7 @@
 
 First github action for learning.
 
-Use the specified compression tool to compress the specified file suffix in the specified directory.
+Use the specified compression tool to compress all the specified file suffix in the specified directory.
 
 ## Inputs
 

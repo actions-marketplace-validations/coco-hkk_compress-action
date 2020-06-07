@@ -10,7 +10,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Compress txt with gzip
-        uses: ./
+        uses: coco-hkk@compress-action@master
         id: step1
         with:
           file-suffix: 'txt'
@@ -36,7 +36,7 @@ jobs:
           if [ "0"x != "${{ steps.step2.outputs.state }}"x ]; then
             echo "archive create failed, exit"
           else
-            tar -tzvf ${{ steps.step2.outputs.archive }}
+            tar -tjvf ${{ steps.step2.outputs.archive }}
           fi
 
       - name: Compress tex with zip
@@ -51,5 +51,5 @@ jobs:
           if [ "0"x != "${{ steps.step3.outputs.state }}"x ]; then
             echo "archive create failed, exit"
           else
-            tar -tzvf ${{ steps.step3.outputs.archive }}
+            unzip ${{ steps.step3.outputs.archive }}
           fi

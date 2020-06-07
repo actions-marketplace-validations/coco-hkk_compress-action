@@ -20,13 +20,13 @@ if [[ "$tool" =~ ^(tar|zip|gzip|bzip2)$ ]]
 then
     target=$(date +%Y-%m-%d_%H_%M)
 else
-    echo "unsupport tool: $tool, exit"
+    echo "compress tool not supported: $tool."
     echo "::set-output name=state::1"
     exit
 fi
 
 if [ ! -d "$path" ]; then
-    echo "path $path not exist, exit"
+    echo "target directory path not exist: $path"
     echo "::set-output name=state::2"
     exit
 fi
@@ -41,7 +41,8 @@ EOF
 
 find $path -name "*.$suffix" | tee file
 
-[ $(cat file | wc -l) = '0' ] && echo "no $suffix file exist. To be generating empty archive"
+[ $(cat file | wc -l) = '0' ] && echo "no suffix $suffix file exist. To be
+generating an empty archive"
 
 mkdir $target
 cat file | xargs -i cp {} $target/

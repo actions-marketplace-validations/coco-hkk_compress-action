@@ -6,6 +6,7 @@ RUN apk update && \
     apk add bash && \
     apk add tar && \
     apk add zip && \
+    apk add unzip && \
     apk add gzip && \
     apk add bzip2
 
