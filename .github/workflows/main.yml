@@ -10,7 +10,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Compress txt with gzip
-        uses: coco-hkk@compress-action@master
+        uses: coco-hkk/compress-action@master
         id: step1
         with:
           file-suffix: 'txt'
