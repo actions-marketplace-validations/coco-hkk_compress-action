@@ -1,4 +1,4 @@
-# Compress action
+# Compress action v2.0
 
 ![Compress File](https://github.com/coco-hkk/compress-action/workflows/Compress%20File/badge.svg)
 
@@ -52,7 +52,7 @@ Final generated archive file in GITHUB_WORKSPACE.
 
 ```yaml
 - name: Compress txt with gzip
-    uses: coco-hkk/compress-action@master
+    uses: coco-hkk/compress-action@v2.0
     id: step1
     with:
       file-suffix: 'txt'
