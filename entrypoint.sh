@@ -43,7 +43,8 @@ find $path -name "*.$suffix" | tee source_file_path.txt
 
 [ $(cat source_file_path.txt | wc -l) = '0' ] && echo "no suffix $suffix file exist. To be generating an empty archive"
 
-mkdir $source_file
+[ -d "$source_file" ] || mkdir $source_file
+
 cat source_file_path.txt | xargs -i cp {} $source_file/
 
 case $tool in
