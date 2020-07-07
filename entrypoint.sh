@@ -16,7 +16,7 @@ tool=$(echo $tool | tr '[A-Z]' '[a-z]')
 
 echo "::set-output name=state::0"
 
-if [[ "$tool" =~ ^(tar|zip|gzip|bzip2)$ ]]
+if [[ "$tool" =~ ^(tar|zip|gzip|bzip2|brotli)$ ]]
 then
     target=$(date +%Y-%m-%d_%H_%M)
 else
@@ -63,6 +63,10 @@ case $tool in
     tar)
         archive=$(echo "archive_"$target".tar")
         tar -cf $archive $target
+        ;;
+    brotli)
+        archive=$(echo "archive_"$target".br")
+        brotli $archive $target
         ;;
 esac
 

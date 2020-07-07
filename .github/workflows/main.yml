@@ -53,3 +53,18 @@ jobs:
           else
             unzip ${{ steps.step3.outputs.archive }}
           fi
+
+      - name: Compress tex with brotli
+        uses: ./
+        id: step4
+        with:
+          file-suffix: 'tex'
+          target-directory-path: 'test'
+          compress-tool: 'brotli'
+      - name: Get compressed message
+        run: |
+          if [ "0"x != "${{ steps.step3.outputs.state }}"x ]; then
+            echo "archive create failed, exit"
+          else
+            brotli -d ${{ steps.step3.outputs.archive }}
+          fi

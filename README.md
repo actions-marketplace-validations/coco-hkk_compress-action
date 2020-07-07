@@ -26,7 +26,7 @@ Target directory path
 
 ### `compress-tool`
 
-Compress tools, such as gzip,bzip2,zip,etc.
+Compress tools, such as gzip,bzip2,zip,brotli,etc.
 
 - require: true
 
