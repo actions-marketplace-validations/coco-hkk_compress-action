@@ -2,7 +2,7 @@
 
 set -e
 
-target=""
+source_file=""
 _time=""
 archive=""
 
@@ -18,7 +18,7 @@ echo "::set-output name=state::0"
 
 if [[ "$tool" =~ ^(tar|zip|gzip|bzip2|brotli)$ ]]
 then
-    target=$(date +%Y-%m-%d_%H_%M)
+    source_file=$(date +%Y-%m-%d_%H_%M_%S)
 else
     echo "compress tool not supported: $tool."
     echo "::set-output name=state::1"
@@ -39,34 +39,33 @@ compress-tool           : $tool
 
 EOF
 
-find $path -name "*.$suffix" | tee file
+find $path -name "*.$suffix" | tee source_file_path.txt
 
-[ $(cat file | wc -l) = '0' ] && echo "no suffix $suffix file exist. To be
-generating an empty archive"
+[ $(cat source_file_path.txt | wc -l) = '0' ] && echo "no suffix $suffix file exist. To be generating an empty archive"
 
-mkdir $target
-cat file | xargs -i cp {} $target/
+mkdir $source_file
+cat source_file_path.txt | xargs -i cp {} $source_file/
 
 case $tool in
     zip)
-        archive=$(echo "archive_"$target".zip")
-        zip -rq $archive $target
+        archive=$(echo "archive_"$source_file".zip")
+        zip -rq $archive $source_file
         ;;
     gzip)
-        archive=$(echo "archive_"$target".tar.gz")
-        tar -czf $archive $target
+        archive=$(echo "archive_"$source_file".tar.gz")
+        tar -czf $archive $source_file
         ;;
     bzip2)
-        archive=$(echo "archive_"$target".tar.bz2")
-        tar -cjf $archive $target
+        archive=$(echo "archive_"$source_file".tar.bz2")
+        tar -cjf $archive $source_file
         ;;
     tar)
-        archive=$(echo "archive_"$target".tar")
-        tar -cf $archive $target
+        archive=$(echo "archive_"$source_file".tar")
+        tar -cf $archive $source_file
         ;;
     brotli)
-        archive=$(echo "archive_"$target".br")
-        brotli $archive $target
+        archive=$(echo "archive_"$source_file".br")
+        brotli $archive $source_file
         ;;
 esac
 
@@ -74,5 +73,5 @@ esac
 echo ::set-output name=archive::$archive
 
 # clean
-rm file
-rm -rf $target
+rm source_file_path.txt
+rm -rf $source_file

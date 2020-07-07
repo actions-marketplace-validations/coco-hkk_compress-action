@@ -63,8 +63,8 @@ jobs:
           compress-tool: 'brotli'
       - name: Get compressed message
         run: |
-          if [ "0"x != "${{ steps.step3.outputs.state }}"x ]; then
+          if [ "0"x != "${{ steps.step4.outputs.state }}"x ]; then
             echo "archive create failed, exit"
           else
-            brotli -d ${{ steps.step3.outputs.archive }}
+            brotli -d ${{ steps.step4.outputs.archive }}
           fi
