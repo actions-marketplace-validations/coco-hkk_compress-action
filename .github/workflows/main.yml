@@ -71,6 +71,7 @@ jobs:
           mkdir out && cd out
           ../configure-cmake
           make
+          sudo make install
 
           cd $GITHUB_WORKSPACE
 
@@ -80,9 +81,6 @@ jobs:
             echo "archive create failed, exit"
           else
             archive=${{ steps.step4.outputs.archive }}
-            $HOME/brotli/out/brotli -d $archive
-            ls -l
-            sudo chown root:root ${archive%.*}
-            ls -l
+            brotli -d $archive
             tar -xf ${archive%.*}
           fi
