@@ -63,9 +63,12 @@ jobs:
           compress-tool: 'brotli'
       - name: decompress
         run: |
+          apt-get install brotli
+
           if [ "0"x != "${{ steps.step4.outputs.state }}"x ]; then
             echo "archive create failed, exit"
           else
-            brotli -d ${{ steps.step4.outputs.archive }}
-            tar -xf ${${{ steps.step4.outputs.archive }}%.*}
+            archive=${{ steps.step4.outputs.archive }}
+            brotli -d $archive
+            tar -xf ${archive%.*}
           fi
