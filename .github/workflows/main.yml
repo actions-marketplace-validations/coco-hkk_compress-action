@@ -71,7 +71,6 @@ jobs:
           mkdir out && cd out
           ../configure-cmake
           make
-          make install
 
           cd $GITHUB_WORKSPACE
 
