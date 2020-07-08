@@ -82,7 +82,7 @@ jobs:
             archive=${{ steps.step4.outputs.archive }}
             $HOME/brotli/out/brotli -d $archive
             ls -l
-            chown root:root ${archive%.*}
+            sudo chown root:root ${archive%.*}
             ls -l
             tar -xf ${archive%.*}
           fi
