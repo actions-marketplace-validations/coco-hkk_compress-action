@@ -18,7 +18,7 @@ echo "::set-output name=state::0"
 
 if [[ "$tool" =~ ^(tar|zip|gzip|bzip2|brotli)$ ]]
 then
-    source_file=$(date +%Y-%m-%d_%H_%M_%S)
+    source_file=$tool"_"$(date +%Y-%m-%d_%H_%M_%S)
 else
     echo "compress tool not supported: $tool."
     echo "::set-output name=state::1"
@@ -65,8 +65,9 @@ case $tool in
         tar -cf $archive $source_file
         ;;
     brotli)
-        archive=$(echo "archive_"$source_file".br")
-        brotli $archive $source_file
+        archive=$(echo "archive_"$source_file".tar.br")
+	tar -cf temp.tar $source_file
+        brotli -Z temp.tar -o $archive 
         ;;
 esac
 

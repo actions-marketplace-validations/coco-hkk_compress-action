@@ -46,7 +46,7 @@ jobs:
           file-suffix: 'tex'
           target-directory-path: 'test'
           compress-tool: 'zip'
-      - name: Get compressed message
+      - name: decompress
         run: |
           if [ "0"x != "${{ steps.step3.outputs.state }}"x ]; then
             echo "archive create failed, exit"
@@ -61,10 +61,11 @@ jobs:
           file-suffix: 'tex'
           target-directory-path: 'test'
           compress-tool: 'brotli'
-      - name: Get compressed message
+      - name: decompress
         run: |
           if [ "0"x != "${{ steps.step4.outputs.state }}"x ]; then
             echo "archive create failed, exit"
           else
             brotli -d ${{ steps.step4.outputs.archive }}
+            tar -xf ${${{ steps.step4.outputs.archive }}%.*}
           fi
