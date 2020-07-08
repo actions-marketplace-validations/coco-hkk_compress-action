@@ -61,12 +61,18 @@ jobs:
           file-suffix: 'tex'
           target-directory-path: 'test'
           compress-tool: 'brotli'
+
+      - name: Init submodule
+        run: |
+          git submodule update --init --recursive
+
       - name: Install brotli
         run: |
+          cd ../../
           git clone https://github.com/bagder/libbrotli
           cd libbrotli
           ./autogen.sh && ./configure && make && make install
-          cd -
+          cd ${{ GITHUB_WORKSPACE }}
 
       - name: decompress
         run: |
