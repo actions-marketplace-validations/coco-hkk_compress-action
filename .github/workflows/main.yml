@@ -62,16 +62,15 @@ jobs:
           target-directory-path: 'test'
           compress-tool: 'brotli'
 
-      - name: Init submodule
-        run: |
-          git submodule update --init --recursive
-
       - name: Install brotli
         run: |
-          cd ../../
-          git clone https://github.com/bagder/libbrotli
-          cd libbrotli
-          ./autogen.sh && ./configure && make && make install
+          cd ${{ HOME }}
+          git clone https://github.com/google/brotli
+          cd brotli
+          mkdir out && cd out
+          cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=./installed ..
+          cmake --build . --config Release --target install
+
           cd ${{ GITHUB_WORKSPACE }}
 
       - name: decompress
