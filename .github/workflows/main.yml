@@ -73,6 +73,7 @@ jobs:
           else
             archive=${{ steps.step4.outputs.archive }}
             brotli -d $archive
+            sudo chown root:root ${archive%.*}
             ls -l
-            sudo tar -xf ${archive%.*}
+            tar -xvf ${archive%.*}
           fi

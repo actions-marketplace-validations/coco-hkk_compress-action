@@ -68,6 +68,7 @@ case $tool in
         archive=$(echo "archive_"$source_file".tar.br")
 	tar -cf temp.tar $source_file
         brotli -Z temp.tar -o $archive 
+	rm -f temp.tar
         ;;
 esac
 
