@@ -64,14 +64,16 @@ jobs:
 
       - name: Install brotli
         run: |
-          cd ${{ HOME }}
+          cd $HOME
           git clone https://github.com/google/brotli
           cd brotli
-          mkdir out && cd out
-          cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=./installed ..
-          cmake --build . --config Release --target install
 
-          cd ${{ GITHUB_WORKSPACE }}
+          mkdir out && cd out
+          ../configure-cmake
+          make
+          make install
+
+          cd $GITHUB_WORKSPACE
 
       - name: decompress
         run: |
