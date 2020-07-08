@@ -81,6 +81,6 @@ jobs:
             echo "archive create failed, exit"
           else
             archive=${{ steps.step4.outputs.archive }}
-            brotli -d $archive
+            $HOME/brotli/out/brotli -d $archive
             tar -xf ${archive%.*}
           fi
