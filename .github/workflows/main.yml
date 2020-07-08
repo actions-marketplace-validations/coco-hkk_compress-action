@@ -81,5 +81,6 @@ jobs:
           else
             archive=${{ steps.step4.outputs.archive }}
             $HOME/brotli/out/brotli -d $archive
+            ls -l
             tar -xf ${archive%.*}
           fi
