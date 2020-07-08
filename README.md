@@ -1,4 +1,4 @@
-# Compress action v2.0
+# Compress action v2.1
 
 ![Compress File](https://github.com/coco-hkk/compress-action/workflows/Compress%20File/badge.svg)
 
@@ -52,7 +52,7 @@ Final generated archive file in GITHUB_WORKSPACE.
 
 ```yaml
 - name: Compress txt with gzip
-    uses: coco-hkk/compress-action@v2.0
+    uses: coco-hkk/compress-action@v2.1
     id: step1
     with:
       file-suffix: 'txt'
@@ -66,3 +66,7 @@ Final generated archive file in GITHUB_WORKSPACE.
         tar -tzvf ${{ steps.step1.outputs.archive }}
       fi
 ```
+
+### `brotli`
+
+Brotli only support one input file, so make input directory as one tarball with tar.
