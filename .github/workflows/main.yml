@@ -64,16 +64,17 @@ jobs:
 
       - name: Install brotli
         run: |
-          cd $HOME
-          git clone https://github.com/google/brotli
-          cd brotli
+          sudo apt-get install brotli
+          #cd $HOME
+          #git clone https://github.com/google/brotli
+          #cd brotli
 
-          mkdir out && cd out
-          ../configure-cmake
-          make
-          sudo make install
+          #mkdir out && cd out
+          #../configure-cmake
+          #make
+          #sudo make install
 
-          cd $GITHUB_WORKSPACE
+          #cd $GITHUB_WORKSPACE
 
       - name: decompress
         run: |
