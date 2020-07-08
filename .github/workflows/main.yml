@@ -65,16 +65,6 @@ jobs:
       - name: Install brotli
         run: |
           sudo apt-get install brotli
-          #cd $HOME
-          #git clone https://github.com/google/brotli
-          #cd brotli
-
-          #mkdir out && cd out
-          #../configure-cmake
-          #make
-          #sudo make install
-
-          #cd $GITHUB_WORKSPACE
 
       - name: decompress
         run: |
@@ -83,5 +73,6 @@ jobs:
           else
             archive=${{ steps.step4.outputs.archive }}
             brotli -d $archive
-            tar -xf ${archive%.*}
+            ls -l
+            sudo tar -xf ${archive%.*}
           fi
